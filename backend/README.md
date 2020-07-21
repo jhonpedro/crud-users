@@ -12,7 +12,7 @@
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/jhonpedro/crud-users">
 
   <a href="https://github.com/jhonpedro">
-    <img alt="Made by" src="https://img.shields.io/badge/made%20by-joão%pedro-gree">
+    <img alt="Made by" src="https://img.shields.io/badge/made%20by-joao%pedro-gree">
   </a>
   
   <img alt="Repository size" src="https://img.shields.io/github/repo-size/jhonpedro/crud-users">
