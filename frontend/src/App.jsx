@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom"
 
 import Routes from "./routes/index"
 import Header from "./components/Header"
+import { ToastContainer } from "react-toastify"
 
 function App () {
 
@@ -12,6 +13,7 @@ function App () {
       <Header />
       <Routes />
       <GlobalStyle />
+      <ToastContainer autoClose={ 3000 } limit={ 2 } />
     </Router>
   );
 }

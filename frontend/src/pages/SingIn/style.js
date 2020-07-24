@@ -1,27 +1,41 @@
 import styled from "styled-components"
 import color from "../../style/colors"
 
-export const LoginContainer = styled.div`
+export const SingInContainer = styled.div`
     margin: 0 auto;
     padding-top: 100px;
 `
 
-export const LoginContent = styled.div`
+export const SingInContent = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     align-content: center;
 `
 
-export const LoginDiv = styled.div`
+export const SingInDiv = styled.div`
     width: 65%;
     height: 350px;
     background-color: ${color.light_dark};
     border-radius: 15px;
-    padding: 90px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    opacity: 1;
+    transition: opacity 300ms;
+
+    .opacity1{
+        opacity: 0;
+    }
+    .opacity2{
+        opacity: 1;
+    }
 `
 
-export const LoginForm = styled.form`
+export const SingInForm = styled.form`
     width: 300px;
     display: flex;
     flex-direction: column;

@@ -22,7 +22,7 @@ routes.post("/update-user", Auth, UserController.updateUser)
 routes.post("/delete-user", Auth, UserController.deleteUser)
 
 // Authentication
-routes.get("/authenticate", UserController.authenticate)
+routes.post("/authenticate", UserController.authenticate)
 
 
 module.exports = routes

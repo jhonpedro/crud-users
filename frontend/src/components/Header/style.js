@@ -20,16 +20,15 @@ export const DivSides = styled.div`
 
 export const SpanHighRoboto = styled.span`
     font-size: 1.7rem;
+
+    span {
+        font-size: 0.9rem;
+    }
 `
-export const SpanLowRoboto = styled.span`
-    font-size: 0.9rem;
-`
 
-export const SpanPacifico = styled.span`
+export const SpanCursive = styled.span`
 
-    @import url('https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap');
-
-    font-family: "Leckerli One", cursive;
+    font-family: cursive;
     font-size: 1.7rem;
     display: inline-block;
     margin-left: 20px;

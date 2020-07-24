@@ -18,13 +18,13 @@ module.exports = {
         if (data) {
             return res.status(200).json({ data, loggedUser: req.loggedUser })
         } else {
-            return res.status(404).json({ error: "id not found" })
+            return res.status(200).json({ error: "id not found" })
         }
 
     },
     async createUser (req, res) {
-        const { email, name, password } = req.body
-
+        const { email: emailRaw, name, password } = req.body
+        const email = emailRaw.toLowerCase()
         try {
             const userInTable = await User.findOne({
                 where: {
@@ -32,20 +32,21 @@ module.exports = {
                 }
             })
 
-            if (userInTable) throw "Error"
+            if (userInTable) throw "user already exist"
 
             let salt = bcrypt.genSaltSync(10)
             let passwordEncrypted = bcrypt.hashSync(password, salt)
 
             const createdUser = await User.create({
-                email,
+                email: email.toLowerCase(),
                 name,
                 password: passwordEncrypted
             })
             return res.json(createdUser)
         } catch (error) {
-            return res.status(401).json({
-                error: "Error in user creation"
+            return res.status(200).json({
+                error: "Error in user creation",
+                message: error
             })
         }
     },
@@ -65,7 +66,7 @@ module.exports = {
 
             const isPasswordCorrect = bcrypt.compareSync(password, user.password)
 
-            if (!isPasswordCorrect) return res.status(401).json({ error: "wrong password" })
+            if (!isPasswordCorrect) return res.status(200).json({ error: "wrong password" })
 
             let toPass
 
@@ -82,7 +83,7 @@ module.exports = {
             return res.status(200).json({ data: await User.findByPk(user.id), loggedUser: req.loggedUser })
         } catch (error) {
             console.log("\nerror:", error)
-            return res.status(500).json({ error: "failed in updating", message: error.message })
+            return res.status(200).json({ error: "failed in updating", message: error.message })
         }
     },
     async deleteUser (req, res) {
@@ -102,36 +103,46 @@ module.exports = {
 
             return res.status(200).json({ data: user, loggedUser: req.loggedUser })
         } catch (error) {
-            return res.status(500).json({ error: "faile to delete", message: error.message })
+            return res.status(200).json({ error: "faile to delete", message: error.message })
         }
     },
     async authenticate (req, res) {
-        const { email, password } = req.body
+        try {
+            const { email: emailRaw, password } = req.body
 
-        const user = await User.findOne({
-            where: {
-                email
-            }
-        })
+            console.log(req.body)
+            const email = emailRaw.toLowerCase()
 
-        if (user) {
-            const isPasswordCorrect = bcrypt.compareSync(password, user.password)
-
-            if (isPasswordCorrect) {
-                jwt.sign({ name: user.name, email, password: user.password }, process.env.JWT_SECRET, { expiresIn: "4h" }, (error, token) => {
-                    if (error) res.status(500).json({ error: "error in token creation" })
-
-                    return res.status(200).json({ token })
-                })
-            } else {
-                return res.status(401).json({
-                    error: "wrong password"
-                })
-            }
-        } else {
-            return res.status(401).json({
-                error: "No user found"
+            const user = await User.findOne({
+                where: {
+                    email
+                }
             })
+
+            if (user) {
+                const isPasswordCorrect = bcrypt.compareSync(password, user.password)
+
+                if (isPasswordCorrect) {
+                    jwt.sign({ name: user.name, email, password: user.password }, process.env.JWT_SECRET, { expiresIn: "4h" }, (error, token) => {
+                        if (error) res.status(200).json({ error: "error in token creation", message: "error in your token" })
+
+                        return res.status(200).json({ token })
+                    })
+                } else {
+                    return res.status(200).json({
+                        error: "wrong password",
+                        message: "wrong password"
+                    })
+                }
+            } else {
+                return res.status(200).json({
+                    error: "No user found",
+                    message: "wrong e-mail"
+                })
+            }
+
+        } catch (error) {
+            return res.status(200).json({ error: "faile to authenticate", message: error.message })
         }
     }
 }
