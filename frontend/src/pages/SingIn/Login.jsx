@@ -1,7 +1,7 @@
-import React, { useState } from "react"
-import { useHistory } from "react-router-dom"
+import React, { useState, useEffect } from "react"
+import { useHistory, useLocation } from "react-router-dom"
 import Api from "../../services/Api"
-import { SingInContainer, SingInContent, SingInDiv, DivButtons, SingInForm } from "./style"
+import { Container, Content, Div, DivButtons, Form } from "./style"
 
 import Icon from "../../components/Icons"
 import Input from "../../components/Inputs"
@@ -17,6 +17,24 @@ function Login () {
     const [newPassword, setNewPassword] = useState("")
     const [createAcount, setCreateAcount] = useState(false)
     const history = useHistory()
+    const location = useLocation()
+
+    useEffect(() => {
+        if (location.search) {
+            const search = location.search.toLowerCase().slice(1)
+            const split = search.split("&")
+
+            split.forEach(elem => {
+                if (elem.includes("session")) {
+                    const statusSession = elem.slice(elem.indexOf("=") + 1)
+                    if (statusSession === "expired") {
+                        toast.error(`Sua seção expirou! Faça o login novamente`, { position: toast.POSITION.BOTTOM_CENTER, autoClose: 10000 })
+                    }
+                }
+            })
+
+        }
+    }, [])
 
     const handleSubmit = async event => {
         try {
@@ -78,24 +96,24 @@ function Login () {
     }
 
     return (
-        <SingInContainer>
-            <SingInContent>
+        <Container>
+            <Content>
                 { !createAcount ? (
-                    <SingInDiv>
+                    <Div>
                         <Icon icon="user" size="5em" />
-                        <SingInForm onSubmit={ handleSubmit }>
+                        <Form onSubmit={ handleSubmit }>
                             <Input placeholder={ "E-mail" } onChange={ (event) => handleAdd(event, "email") } value={ email } type="email" />
                             <Input placeholder={ "Senha" } type="password" onChange={ (event) => handleAdd(event, "password") } value={ password } />
                             <DivButtons>
                                 <Button value={ "Criar conta" } onClick={ () => setCreateAcount(true) } />
                                 <Button value={ "Entrar" } type="submit" />
                             </DivButtons>
-                        </SingInForm>
-                    </SingInDiv>
+                        </Form>
+                    </Div>
                 ) : (
-                        <SingInDiv>
+                        <Div>
                             <Icon icon="newUser" size="5em" />
-                            <SingInForm onSubmit={ handleNewAcountSubmit }>
+                            <Form onSubmit={ handleNewAcountSubmit }>
                                 <Input placeholder={ "Digite seu nome" } onChange={ event => handleAdd(event, "newName") } value={ newName } />
                                 <Input placeholder={ "Digite seu E-mail" } onChange={ event => handleAdd(event, "newEmail") } value={ newEmail } type="email" />
                                 <Input placeholder={ "Digite uma senha" } onChange={ event => handleAdd(event, "newPassword") } value={ newPassword } />
@@ -103,12 +121,12 @@ function Login () {
                                     <Button value={ "Já tem uma conta?" } onClick={ () => setCreateAcount(false) } />
                                     <Button value={ "Criar a conta" } type="submit" />
                                 </DivButtons>
-                            </SingInForm>
-                        </SingInDiv>
+                            </Form>
+                        </Div>
                     ) }
 
-            </SingInContent>
-        </SingInContainer>
+            </Content>
+        </Container>
     )
 
 }

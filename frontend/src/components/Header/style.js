@@ -5,7 +5,7 @@ export const HeaderContainer = styled.header`
     padding: 15px;
 `
 export const HeaderContent = styled.div`
-    background-color: ${colors.light_dark};
+    background-color: ${colors.darker};
     display: flex;
     align-items: center;
     justify-content: center;

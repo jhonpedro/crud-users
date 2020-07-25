@@ -1,19 +1,19 @@
 import styled from "styled-components"
 import color from "../../style/colors"
 
-export const SingInContainer = styled.div`
+export const Container = styled.div`
     margin: 0 auto;
     padding-top: 100px;
 `
 
-export const SingInContent = styled.div`
+export const Content = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     align-content: center;
 `
 
-export const SingInDiv = styled.div`
+export const Div = styled.div`
     width: 65%;
     height: 350px;
     background-color: ${color.light_dark};
@@ -35,7 +35,7 @@ export const SingInDiv = styled.div`
     }
 `
 
-export const SingInForm = styled.form`
+export const Form = styled.form`
     width: 300px;
     display: flex;
     flex-direction: column;

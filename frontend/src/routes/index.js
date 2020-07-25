@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom"
 
 import AuthRoute from "./AuthRoute"
 import Login from "../pages/SingIn/Login"
+import UserList from "../pages/UsersList"
 
 function Routes () {
     return (
@@ -12,7 +13,7 @@ function Routes () {
             </Route>
             <Route path="/Users">
                 <AuthRoute isPrivate>
-                    <h1>Users</h1>
+                    <UserList />
                 </AuthRoute>
             </Route>
             <Route path="*">
