@@ -1,9 +1,12 @@
 import React from "react"
-import { FaUsers } from "react-icons/fa"
+import { FaUsers, FaUserPlus } from "react-icons/fa"
 
 function Icons ({ icon, ...rest }) {
     if (icon === "user") {
         return <FaUsers { ...rest } />
+    }
+    if (icon === "newUser") {
+        return <FaUserPlus { ...rest } />
     }
 
 }

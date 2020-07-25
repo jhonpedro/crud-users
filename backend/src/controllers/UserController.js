@@ -23,9 +23,10 @@ module.exports = {
 
     },
     async createUser (req, res) {
-        const { email: emailRaw, name, password } = req.body
-        const email = emailRaw.toLowerCase()
         try {
+            const { email: emailRaw, name, password } = req.body
+            if (!emailRaw || !name || !password) throw "Some field(s) are inconplete"
+            const email = emailRaw.toLowerCase()
             const userInTable = await User.findOne({
                 where: {
                     email

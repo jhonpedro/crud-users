@@ -10,9 +10,6 @@ function Routes () {
             <Route path="/Login" >
                 <Login />
             </Route>
-            <Route>
-
-            </Route>
             <Route path="/Users">
                 <AuthRoute isPrivate>
                     <h1>Users</h1>

@@ -12,21 +12,50 @@ function Login () {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [newName, setNewName] = useState("")
+    const [newEmail, setNewEmail] = useState("")
+    const [newPassword, setNewPassword] = useState("")
     const [createAcount, setCreateAcount] = useState(false)
     const history = useHistory()
 
     const handleSubmit = async event => {
-        event.preventDefault()
+        try {
+            event.preventDefault()
 
-        const response = await Api.post("/authenticate", { email, password })
+            const response = await Api.post("/authenticate", { email, password })
 
-        if (response.data.error) {
-            toast.warn(`Wow, we got some error: ${response.data.message}`)
-        } else {
-            localStorage.setItem("token", response.data.token)
-            history.push("/Users")
+            if (response.data.error) {
+                throw response.data.message
+            } else {
+                localStorage.setItem("token", response.data.token)
+                history.push("/Users")
+                return
+            }
+        } catch (error) {
+            toast.warn(`Opa, alguma coisa está errada: ${error}`)
+            return
         }
 
+
+    }
+
+    const handleNewAcountSubmit = async event => {
+        try {
+            event.preventDefault()
+
+            const response = await Api.post("/create-user", { email: newEmail, name: newName, password: newPassword })
+
+            if (response.data.error) {
+                throw response.data.message
+            } else {
+                toast.success("Conta criada com sucesso!")
+                setTimeout(() => { setCreateAcount(false) }, 2000)
+                return
+            }
+        } catch (error) {
+            toast.warn(`Erro na criação da conta! erro: ${error}`)
+            return
+        }
 
     }
 
@@ -37,6 +66,15 @@ function Login () {
         if (inputToChange === "password") {
             setPassword(event.target.value)
         }
+        if (inputToChange === "newName") {
+            setNewName(event.target.value)
+        }
+        if (inputToChange === "newEmail") {
+            setNewEmail(event.target.value)
+        }
+        if (inputToChange === "newPassword") {
+            setNewPassword(event.target.value)
+        }
     }
 
     return (
@@ -46,8 +84,8 @@ function Login () {
                     <SingInDiv>
                         <Icon icon="user" size="5em" />
                         <SingInForm onSubmit={ handleSubmit }>
-                            <Input placeholder={ "E-mail" } onChange={ (event) => handleAdd(event, "email") } />
-                            <Input placeholder={ "Senha" } type="password" onChange={ (event) => handleAdd(event, "password") } />
+                            <Input placeholder={ "E-mail" } onChange={ (event) => handleAdd(event, "email") } value={ email } type="email" />
+                            <Input placeholder={ "Senha" } type="password" onChange={ (event) => handleAdd(event, "password") } value={ password } />
                             <DivButtons>
                                 <Button value={ "Criar conta" } onClick={ () => setCreateAcount(true) } />
                                 <Button value={ "Entrar" } type="submit" />
@@ -56,7 +94,16 @@ function Login () {
                     </SingInDiv>
                 ) : (
                         <SingInDiv>
-                            teest
+                            <Icon icon="newUser" size="5em" />
+                            <SingInForm onSubmit={ handleNewAcountSubmit }>
+                                <Input placeholder={ "Digite seu nome" } onChange={ event => handleAdd(event, "newName") } value={ newName } />
+                                <Input placeholder={ "Digite seu E-mail" } onChange={ event => handleAdd(event, "newEmail") } value={ newEmail } type="email" />
+                                <Input placeholder={ "Digite uma senha" } onChange={ event => handleAdd(event, "newPassword") } value={ newPassword } />
+                                <DivButtons>
+                                    <Button value={ "Já tem uma conta?" } onClick={ () => setCreateAcount(false) } />
+                                    <Button value={ "Criar a conta" } type="submit" />
+                                </DivButtons>
+                            </SingInForm>
                         </SingInDiv>
                     ) }
 
