@@ -24,4 +24,10 @@ export default createGlobalStyle`
     button {
         cursor: pointer;
     }
+    input:focus {
+        outline-offset: 0;
+    }
+    :focus {
+        outline: none;
+    }
 `

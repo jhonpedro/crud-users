@@ -39,6 +39,7 @@ export const Form = styled.form`
     width: 300px;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     margin: 0 auto;
 `
 

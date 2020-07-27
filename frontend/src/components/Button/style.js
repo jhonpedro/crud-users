@@ -8,5 +8,4 @@ export const StyledButton = styled.button`
     color: ${color.darker};
     border-radius: 15px;
     font-size: 0.9rem;
-    display: inline-block;
 `

@@ -90,7 +90,6 @@ module.exports = {
     async deleteUser (req, res) {
         try {
             const id = req.query.id
-            console.log(req.query)
 
             const user = await User.findByPk(parseInt(id))
 

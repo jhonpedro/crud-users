@@ -9,4 +9,8 @@ export const StyledInput = styled.input`
     border: none;
     font-size: 1.1rem;
     margin: 15px 0;
+    &:focus {
+        box-shadow: 0 0 5px ${color.orange};
+        border: none;
+    }
 `

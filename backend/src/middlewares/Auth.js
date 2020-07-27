@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken")
 
 module.exports = function Auth (req, res, next) {
     try {
-        console.log("Veio aqui 2")
         const RawAuth = req.headers["authorization"]
 
         const token = RawAuth.split(" ")[1]
@@ -18,7 +17,6 @@ module.exports = function Auth (req, res, next) {
             next()
         })
     } catch (error) {
-        console.log("Veio aqui")
         return res.status(200).json({ error: "No token here", message: error.message })
     }
 }
