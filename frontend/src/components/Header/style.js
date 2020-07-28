@@ -5,7 +5,7 @@ export const HeaderContainer = styled.header`
     padding: 15px;
 `
 export const HeaderContent = styled.div`
-    background-color: ${colors.darker};
+    background-color: ${colors.containers_background};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,4 +34,13 @@ export const SpanCursive = styled.span`
     margin-left: 20px;
     font-weight: lighter;
     text-align: center;
+`
+
+export const Color = styled.span`
+    color: ${({ color }) => {
+        if (color === "red") return colors.red
+        if (color === "yellow") return colors.yellow
+        if (color === "blue") return colors.blue
+        if (color === "purple") return colors.purple
+    }};
 `

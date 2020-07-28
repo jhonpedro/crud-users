@@ -1,7 +1,10 @@
 export default {
+    red: "#DB3340",
+    yellow: "#FFD900",
+    blue: "#6E9ECF",
+    purple: "#260126",
     orange: "#FF5C00",
-    light_dark: "#6D6D6D",
-    light_grey: "#C4C4C4",
-    darker: "#3E3E3E",
-    background_dark: "#282828"
+    containers_background: "#B0B0B0",
+    containers2_background: "#8C8C8C",
+    background: "#EBEBEB"
 }

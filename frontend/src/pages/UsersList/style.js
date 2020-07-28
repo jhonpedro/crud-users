@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 import Input from "../../components/Inputs"
-import color from "../../style/colors"
+import colors from "../../style/colors"
 
 export const Container = styled.div`
     padding-top: 30px;
@@ -24,14 +24,14 @@ export const Content = styled.div`
 `
 
 export const ContentData = styled.div`
-    color: black;
+    color: ${colors.yellow};
     font-weight: 600;
     position: relative;
     z-index: 1;
 
     border-radius: 15px;
     padding: 15px;
-    background-color: ${color.darker};
+    background-color: ${colors.containers_background};
     font-size: 0.9rem;
     width: 100%;
     transition: margin-bottom linear 300ms;
@@ -49,7 +49,7 @@ export const ContentEditUser = styled.div`
     color: black;
     font-size: 0.9rem;
     font-weight: 600;
-    background-color: ${color.darker};
+    background-color: ${colors.containers_background};
     width: 100%;
     padding: 0px;
     border-radius: 15px;
@@ -65,7 +65,7 @@ export const ContentEditUser = styled.div`
             return css`
                 top: 20px; 
                 padding: 40px 15px 5px 15px; 
-                background-color: ${color.light_grey};
+                background-color: ${colors.containers2_background};
             `
         }
     }}
@@ -82,6 +82,10 @@ export const ContentEditUserInput = styled(Input)`
     padding: 8px;
     font-size: 0.8rem;
     margin: 0;
-    background-color: ${color.darker};
-    color: ${color.light_grey};
+    background-color: ${colors.blue};
+    color: white;
+
+    &::placeholder {
+        color: white;
+    }
 `

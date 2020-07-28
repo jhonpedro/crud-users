@@ -12,7 +12,7 @@ export default createGlobalStyle`
     }
     html, body, #root {
         height: 100%;
-        background-color: ${color.background_dark};
+        background-color: ${color.background};
         color: white;
     }
     a {

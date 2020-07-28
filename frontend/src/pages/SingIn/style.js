@@ -16,7 +16,7 @@ export const Content = styled.div`
 export const Div = styled.div`
     width: 65%;
     height: 350px;
-    background-color: ${color.light_dark};
+    background-color: ${color.containers_background};
     border-radius: 15px;
     
     display: flex;

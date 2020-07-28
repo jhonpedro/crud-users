@@ -14,6 +14,7 @@ import {
 } from "./style"
 import Button from "../../components/Button"
 import Icon from "../../components/Icons"
+import colors from "../../style/colors"
 
 function UsersList () {
 
@@ -107,7 +108,7 @@ function UsersList () {
         console.log(response)
         if (response.data.error) return toast.warn("Alguma coisa deu errado!")
 
-        toast.success(`Usuário ${response.data.data.name} deletado! Por: ${response.data.loggedUser.name} !`)
+        toast.success(`Usuário ${response.data.data.name} deletado !`)
         setTimeout(() => {
             window.location.reload()
         }, 2000)
@@ -171,7 +172,7 @@ function UsersList () {
                             <span>{ user.email }</span>
                             <span>{ user.createdAt }</span>
                             <span onClick={ () => handleShowToEdit(user.id) }>
-                                <Icon icon="editUser" size="1.5em" />
+                                <Icon icon="editUser" size="1.5em" color={ colors.blue } />
                             </span>
                         </ContentData>
                         <ContentEditUser showToEdit={ user.showToEdit }>
@@ -191,8 +192,8 @@ function UsersList () {
                                     onChange={ event => handleChange(user.id, event, "passwordToVerify") }
                                     value={ user.editing.passwordToVerify } />
 
-                                <Button value="Atualizar" type="submit" />
-                                <Icon icon="deleteUser" size="1.7em" color="red" onClick={ () => { handleDelete(user.id); handleShowToEdit(user.id) } } />
+                                <Button value="Atualizar" type="submit" background_color={ colors.blue } color="white" />
+                                <Icon icon="deleteUser" size="1.7em" color={ colors.purple } onClick={ () => { handleDelete(user.id); handleShowToEdit(user.id) } } />
                             </ContentEditUserForm>
                         </ContentEditUser>
                     </Content>

@@ -6,6 +6,7 @@ import { Container, Content, Div, DivButtons, Form } from "./style"
 import Icon from "../../components/Icons"
 import Input from "../../components/Inputs"
 import Button from "../../components/Button"
+import colors from "../../style/colors"
 import { toast } from "react-toastify"
 
 function Login () {
@@ -102,11 +103,18 @@ function Login () {
                     <Div>
                         <Icon icon="user" size="5em" />
                         <Form onSubmit={ handleSubmit }>
-                            <Input placeholder={ "E-mail" } onChange={ (event) => handleAdd(event, "email") } value={ email } type="email" />
-                            <Input placeholder={ "Senha" } type="password" onChange={ (event) => handleAdd(event, "password") } value={ password } />
+                            <Input
+                                placeholder={ "E-mail" }
+                                onChange={ (event) => handleAdd(event, "email") }
+                                value={ email } type="email" />
+                            <Input
+                                placeholder={ "Senha" }
+                                type="password"
+                                onChange={ (event) => handleAdd(event, "password") }
+                                value={ password } />
                             <DivButtons>
-                                <Button value={ "Criar conta" } onClick={ () => setCreateAcount(true) } />
-                                <Button value={ "Entrar" } type="submit" />
+                                <Button value={ "Criar conta" } onClick={ () => setCreateAcount(true) } background_color={ colors.red } />
+                                <Button value={ "Entrar" } type="submit" background_color={ colors.yellow } />
                             </DivButtons>
                         </Form>
                     </Div>
@@ -116,10 +124,10 @@ function Login () {
                             <Form onSubmit={ handleNewAcountSubmit }>
                                 <Input placeholder={ "Digite seu nome" } onChange={ event => handleAdd(event, "newName") } value={ newName } />
                                 <Input placeholder={ "Digite seu E-mail" } onChange={ event => handleAdd(event, "newEmail") } value={ newEmail } type="email" />
-                                <Input placeholder={ "Digite uma senha" } onChange={ event => handleAdd(event, "newPassword") } value={ newPassword } />
+                                <Input placeholder={ "Digite uma senha" } onChange={ event => handleAdd(event, "newPassword") } value={ newPassword } type="password" />
                                 <DivButtons>
                                     <Button value={ "Já tem uma conta?" } onClick={ () => setCreateAcount(false) } />
-                                    <Button value={ "Criar a conta" } type="submit" />
+                                    <Button value={ "Criar a conta" } type="submit" background_color={ colors.red } />
                                 </DivButtons>
                             </Form>
                         </Div>
