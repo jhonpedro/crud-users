@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import Api from "../../services/Api"
 import { useParams } from "react-router-dom"
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
 import { Container, Content, Div, Labels, DivButtons } from "./style"
@@ -37,12 +37,9 @@ function User () {
     }, [])
 
     const handleBack = () => {
-        history.goBack()
+        return history.goBack()
     }
 
-    const handleEdit = () => {
-        console.log("edit")
-    }
     return (
         <Container>
             <Content>
@@ -61,7 +58,9 @@ function User () {
                 </Div>
                 <DivButtons>
                     <Button value="Voltar" background_color={ colors.yellow } onClick={ handleBack } />
-                    <Button value="Editar" background_color={ colors.purple } color="white" onClick={ handleEdit } />
+                    <Link to={ `/Users#user${id}` }>
+                        <Button value="Editar" background_color={ colors.purple } color="white" />
+                    </Link>
                 </DivButtons>
             </Content>
         </Container>

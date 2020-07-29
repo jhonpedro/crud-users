@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useHistory } from "react-router-dom"
+import { useHistory, useLocation } from "react-router-dom"
 import Api from "../../services/Api"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
@@ -21,6 +21,7 @@ function UsersList () {
 
     const [usersList, setUsersList] = useState([])
     const history = useHistory()
+    const location = useLocation()
 
     useEffect(() => {
 
@@ -33,14 +34,21 @@ function UsersList () {
 
             if (data.error) return history.push("/Login?session=expired")
 
+            let idSearching
+            location.hash ? idSearching = parseInt(location.hash.replace("#user", "")) : idSearching = false
+
             const rawUserList = data.data.map(user => {
+                let showToEdit = false
+                if (idSearching === user.id) {
+                    showToEdit = true
+                }
                 return (
                     {
                         id: user.id,
                         name: user.name,
                         email: user.email,
                         createdAt: user.createdAt,
-                        showToEdit: false,
+                        showToEdit,
                         editing: {
                             newName: "",
                             newEmail: "",
@@ -166,7 +174,7 @@ function UsersList () {
     return (
         <Container>
             { usersList.map(user => (
-                <ContentWrapper key={ user.id }>
+                <ContentWrapper id={ `user${user.id}` } key={ user.id }>
                     <Content>
                         <ContentData showToEdit={ user.showToEdit }>
                             <Link to={ `/User/${user.id}` }>
