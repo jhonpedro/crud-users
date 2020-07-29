@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import Api from "../../services/Api"
+import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
 import {
@@ -168,9 +169,11 @@ function UsersList () {
                 <ContentWrapper key={ user.id }>
                     <Content>
                         <ContentData showToEdit={ user.showToEdit }>
-                            <span>{ user.name }</span>
-                            <span>{ user.email }</span>
-                            <span>{ user.createdAt }</span>
+                            <Link to={ `/User/${user.id}` }>
+                                <span>{ user.name }</span>
+                                <span>{ user.email }</span>
+                                <span>{ user.createdAt }</span>
+                            </Link>
                             <span onClick={ () => handleShowToEdit(user.id) }>
                                 <Icon icon="editUser" size="1.5em" color={ colors.blue } />
                             </span>

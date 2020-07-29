@@ -28,8 +28,8 @@ export const SpanHighRoboto = styled.span`
 
 export const SpanCursive = styled.span`
 
-    font-family: cursive;
-    font-size: 1.7rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 2rem;
     display: inline-block;
     margin-left: 20px;
     font-weight: lighter;

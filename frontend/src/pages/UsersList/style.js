@@ -24,7 +24,13 @@ export const Content = styled.div`
 `
 
 export const ContentData = styled.div`
-    color: ${colors.yellow};
+    a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: ${colors.yellow};
+        width: 90%;
+    }
     font-weight: 600;
     position: relative;
     z-index: 1;

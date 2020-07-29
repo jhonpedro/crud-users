@@ -126,7 +126,7 @@ function Login () {
                                 <Input placeholder={ "Digite seu E-mail" } onChange={ event => handleAdd(event, "newEmail") } value={ newEmail } type="email" />
                                 <Input placeholder={ "Digite uma senha" } onChange={ event => handleAdd(event, "newPassword") } value={ newPassword } type="password" />
                                 <DivButtons>
-                                    <Button value={ "Já tem uma conta?" } onClick={ () => setCreateAcount(false) } />
+                                    <Button value={ "Já tem uma conta?" } onClick={ () => setCreateAcount(false) } background_color={ colors.orange } />
                                     <Button value={ "Criar a conta" } type="submit" background_color={ colors.red } />
                                 </DivButtons>
                             </Form>

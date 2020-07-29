@@ -2,6 +2,8 @@ import { createGlobalStyle } from "styled-components"
 import "react-toastify/dist/ReactToastify.css"
 import color from "./colors"
 
+import myFontURL from "../assets/Fonts/Pacifico-Regular.ttf"
+
 export default createGlobalStyle`
 
     * {
