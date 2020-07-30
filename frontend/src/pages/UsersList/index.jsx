@@ -54,8 +54,7 @@ function UsersList () {
                             newEmail: "",
                             newPassword: "",
                             passwordToVerify: ""
-                        },
-                        selectedElem: idSearching
+                        }
                     }
                 )
             })
