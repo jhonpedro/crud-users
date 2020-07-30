@@ -1,5 +1,4 @@
 <h1 align="center">
-    Web Client
 	<img alt="Logo" src="https://user-images.githubusercontent.com/64690421/88960991-b99ae280-d27a-11ea-98c6-cb2256139fc0.gif" width="800px" />
 </h1>
 
