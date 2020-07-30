@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components"
-import color from "../../style/colors"
 
 export const StyledButton = styled.button`
     border: none;

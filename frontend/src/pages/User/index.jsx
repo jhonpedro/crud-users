@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Api from "../../services/Api"
-import { useParams } from "react-router-dom"
-import { useHistory, Link } from "react-router-dom"
+import { useParams, useHistory, Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
 import { Container, Content, Div, Labels, DivButtons } from "./style"
@@ -32,9 +31,9 @@ function User () {
                 return
             })
         } catch (error) {
-            toast.warn(`Ocorreu um erro :( ${error}`)
+            return toast.warn(`Ocorreu um erro :( ${error}`)
         }
-    }, [])
+    }, [id, history])
 
     const handleBack = () => {
         return history.goBack()

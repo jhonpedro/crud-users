@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { useHistory, useLocation } from "react-router-dom"
 import Api from "../../services/Api"
 import { Link } from "react-router-dom"
@@ -54,7 +54,8 @@ function UsersList () {
                             newEmail: "",
                             newPassword: "",
                             passwordToVerify: ""
-                        }
+                        },
+                        selectedElem: idSearching
                     }
                 )
             })
@@ -62,7 +63,7 @@ function UsersList () {
             setUsersList(rawUserList)
         })
         return
-    }, [])
+    }, [history, location.hash])
 
     const handleShowToEdit = userId => {
         const newList = usersList.map(user => {
@@ -97,14 +98,13 @@ function UsersList () {
             }
         })
 
-        console.log(response)
         if (response.data.error) return toast.warn("Não foi possivel efetuar a atualização")
 
         toast.success("Atualização efetuada com sucesso!")
         setTimeout(() => {
             console.log("2 segundos depois")
             window.location.reload()
-        }, 2000)
+        }, 1000)
     }
 
     const handleDelete = async id => {
@@ -171,45 +171,52 @@ function UsersList () {
         }
     }
 
+    const contentLoaded = elem => {
+        console.log(elem)
+    }
+
     return (
         <Container>
-            { usersList.map(user => (
-                <ContentWrapper id={ `user${user.id}` } key={ user.id }>
-                    <Content>
-                        <ContentData showToEdit={ user.showToEdit }>
-                            <Link to={ `/User/${user.id}` }>
-                                <span>{ user.name }</span>
-                                <span>{ user.email }</span>
-                                <span>{ user.createdAt }</span>
-                            </Link>
-                            <span onClick={ () => handleShowToEdit(user.id) }>
-                                <Icon icon="editUser" size="1.5em" color={ colors.blue } />
-                            </span>
-                        </ContentData>
-                        <ContentEditUser showToEdit={ user.showToEdit }>
-                            <ContentEditUserForm onSubmit={ (event) => handleEditSubmit(event, user.id) }>
-                                <ContentEditUserInput
-                                    placeholder={ user.name }
-                                    onChange={ event => handleChange(user.id, event, "newName") }
-                                    value={ user.editing.newName } />
-                                <ContentEditUserInput
-                                    placeholder={ "New password (opitional)" }
-                                    type="password"
-                                    onChange={ event => handleChange(user.id, event, "newPassword") }
-                                    value={ user.editing.newPassword } />
-                                <ContentEditUserInput
-                                    placeholder={ "Last password (required)" }
-                                    type="password"
-                                    onChange={ event => handleChange(user.id, event, "passwordToVerify") }
-                                    value={ user.editing.passwordToVerify } />
+            { usersList.map(user => {
+                return (
+                    <ContentWrapper key={ user.id } onLoad={ (e) => contentLoaded(e) }>
+                        <a name={ `user${user.id}` } />
+                        <Content>
+                            <ContentData showToEdit={ user.showToEdit }>
+                                <Link to={ `/User/${user.id}` }>
+                                    <span>{ user.name }</span>
+                                    <span>{ user.email }</span>
+                                    <span>{ user.createdAt }</span>
+                                </Link>
+                                <span onClick={ () => handleShowToEdit(user.id) }>
+                                    <Icon icon="editUser" size="1.5em" color={ colors.blue } />
+                                </span>
+                            </ContentData>
+                            <ContentEditUser showToEdit={ user.showToEdit }>
+                                <ContentEditUserForm onSubmit={ (event) => handleEditSubmit(event, user.id) }>
+                                    <ContentEditUserInput
+                                        placeholder={ user.name }
+                                        onChange={ event => handleChange(user.id, event, "newName") }
+                                        value={ user.editing.newName } />
+                                    <ContentEditUserInput
+                                        placeholder={ "New password (opitional)" }
+                                        type="password"
+                                        onChange={ event => handleChange(user.id, event, "newPassword") }
+                                        value={ user.editing.newPassword } />
+                                    <ContentEditUserInput
+                                        placeholder={ "Last password (required)" }
+                                        type="password"
+                                        onChange={ event => handleChange(user.id, event, "passwordToVerify") }
+                                        value={ user.editing.passwordToVerify } />
 
-                                <Button value="Atualizar" type="submit" background_color={ colors.blue } color="white" />
-                                <Icon icon="deleteUser" size="1.7em" color={ colors.purple } onClick={ () => { handleDelete(user.id); handleShowToEdit(user.id) } } />
-                            </ContentEditUserForm>
-                        </ContentEditUser>
-                    </Content>
-                </ContentWrapper>
-            ))
+                                    <Button value="Atualizar" type="submit" background_color={ colors.blue } color="white" />
+                                    <Icon icon="deleteUser" size="1.7em" color={ colors.purple } onClick={ () => { handleDelete(user.id); handleShowToEdit(user.id) } } />
+                                </ContentEditUserForm>
+                            </ContentEditUser>
+                        </Content>
+                    </ContentWrapper>
+                )
+            })
             }
         </Container>
     )

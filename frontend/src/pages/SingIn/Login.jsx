@@ -35,7 +35,7 @@ function Login () {
             })
 
         }
-    }, [])
+    }, [location.search])
 
     const handleSubmit = async event => {
         try {
