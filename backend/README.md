@@ -1,4 +1,6 @@
 <h1 align="center">
+  API
+  <small>Use in front end</small>
 	<img alt="Logo" src="https://user-images.githubusercontent.com/64690421/88960991-b99ae280-d27a-11ea-98c6-cb2256139fc0.gif" width="800px" />
 </h1>
 
@@ -31,7 +33,6 @@
   <a href="#-about-the-project">About the project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-getting-started">Getting started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-how-to-contribute">How to contribute</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 </p>
 
 ## 👨🏻‍💻 About the project
@@ -74,6 +75,7 @@ $ git clone https://github.com/jhonpedro/crud-users && cd crud-users
 
 ```bash
 # Install the dependencies
+$ cd /backend
 $ npm i
 
 # Make sure the keys in '.env' to connect with your database
@@ -85,35 +87,5 @@ $ npm start
 
 # Well done, project is started!
 ```
-
-## 🤔 How to contribute
-
-**Make a fork of this repository**
-
-```bash
-# Fork using GitHub official command line
-# If you don't have the GitHub CLI, use the web site to do that.
-
-$ git repo fork jhonpedro/crud-users
-```
-
-**Follow the steps below**
-
-```bash
-# Clone your fork
-$ git clone your-fork-url && cd https://github.com/jhonpedro/crud-users
-
-# Create a branch with your feature
-$ git checkout -b my-feature
-
-# Make the commit with your changes
-$ git commit -m 'feat: My new feature'
-
-# Send the code to your remote branch
-$ git push origin my-feature
-```
-
-After your pull request is merged, you can delete your branch
----
 
 > I'm using this template [here](https://github.com/EliasGcf/readme-template/tree/master/templates)
