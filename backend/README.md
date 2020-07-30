@@ -38,7 +38,7 @@
 
 - <p style="color: red;">An example for a aplication that requires an CRUD for users, <strong>this aplication is only for learning, and it's not suitable for production</strong></p>
 
-To see the **web client**, click here: [PROJECT_NAME Web](https://github/jhonpedro/crud-users/backend/readme.md)</br>
+To see the **web client**, click here: [CRUD Users web](https://github.com/jhonpedro/crud-users/tree/master/frontend)</br>
 
 ## 🚀 Technologies
 
