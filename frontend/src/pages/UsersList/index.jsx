@@ -3,6 +3,7 @@ import { useHistory, useLocation } from "react-router-dom"
 import Api from "../../services/Api"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
+import ChangeFirstToGivenIndex from "../../utils/ChangeFirstToGivenIndex"
 
 import {
     Container,
@@ -30,17 +31,19 @@ function UsersList () {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
         }).then(res => {
-            const data = res.data
+            const { data } = res.data
 
             if (data.error) return history.push("/Login?session=expired")
 
-            let idSearching
+            let idSearching, indexSearching
             location.hash ? idSearching = parseInt(location.hash.replace("#user", "")) : idSearching = false
 
-            const rawUserList = data.data.map(user => {
-                let showToEdit = false
+            const rawUserList = data.map((user, index) => {
+                let showToEdit, selected = false
                 if (idSearching === user.id) {
                     showToEdit = true
+                    selected = true
+                    indexSearching = index
                 }
                 return (
                     {
@@ -49,6 +52,7 @@ function UsersList () {
                         email: user.email,
                         createdAt: user.createdAt,
                         showToEdit,
+                        selected,
                         editing: {
                             newName: "",
                             newEmail: "",
@@ -59,7 +63,11 @@ function UsersList () {
                 )
             })
 
-            setUsersList(rawUserList)
+            if (indexSearching) {
+                setUsersList(ChangeFirstToGivenIndex(rawUserList, indexSearching))
+            }
+
+            return setUsersList(rawUserList)
         })
         return
     }, [history, location.hash])
@@ -170,16 +178,12 @@ function UsersList () {
         }
     }
 
-    const contentLoaded = elem => {
-        console.log(elem)
-    }
-
     return (
         <Container>
             { usersList.map(user => {
+                console.log(usersList)
                 return (
-                    <ContentWrapper key={ user.id } onLoad={ (e) => contentLoaded(e) }>
-                        <a name={ `user${user.id}` } />
+                    <ContentWrapper key={ user.id } >
                         <Content>
                             <ContentData showToEdit={ user.showToEdit }>
                                 <Link to={ `/User/${user.id}` }>
