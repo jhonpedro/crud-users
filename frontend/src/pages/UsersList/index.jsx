@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect } from "react"
 import { useHistory, useLocation } from "react-router-dom"
 import Api from "../../services/Api"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
+import moment from 'moment'
+
 import ChangeFirstToGivenIndex from "../../utils/ChangeFirstToGivenIndex"
 
 import {
@@ -189,7 +191,7 @@ function UsersList () {
                                 <Link to={ `/User/${user.id}` }>
                                     <span>{ user.name }</span>
                                     <span>{ user.email }</span>
-                                    <span>{ user.createdAt }</span>
+                                    <span>{ moment(user.createdAt).fromNow() }</span>
                                 </Link>
                                 <span onClick={ () => handleShowToEdit(user.id) }>
                                     <Icon icon="editUser" size="1.5em" color={ colors.blue } />

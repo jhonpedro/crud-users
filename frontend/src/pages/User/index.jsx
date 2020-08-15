@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import Api from "../../services/Api"
 import { useParams, useHistory, Link } from "react-router-dom"
 import { toast } from "react-toastify"
+import moment from 'moment'
 
 import { Container, Content, Div, Labels, DivButtons } from "./style"
 import Button from "../../components/Button"
@@ -51,7 +52,9 @@ function User () {
                             <Labels name="E-mail: ">
                                 { userPage.email }
                             </Labels>
-
+                            <Labels name="Criado a: ">
+                                { moment(userPage.createdAt).fromNow() }
+                            </Labels>
                         </React.Fragment>
                     ) : "No user found :(" }
                 </Div>
