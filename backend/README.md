@@ -80,9 +80,15 @@ $ npm i
 # Make sure the keys in '.env' to connect with your database
 # are set up correctly.
 
+# Create our database if dont exist with
+$ npx sequelize db:create
+
+# Run migrations
+
+$ npx sequelize db:migrate
+
 # To finish, run the api service
-# Install if you dont have the pm2 lib globaly to have the enviroment variable in start script
-$ npm start
+$ npm dev
 
 # Well done, project is started!
 ```
